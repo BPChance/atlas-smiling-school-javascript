@@ -334,6 +334,11 @@
   line-height: 24px;
 }
 
+.popular .carousel-inner{
+  display: flex;
+  overflow: hidden;
+}
+
 .popular .carousel-control-prev,
 .popular .carousel-control-next {
   width: 60px;

@@ -60,9 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((tutorials) => {
             loader.remove();
 
-            tutorials.forEach((tutorial) => {
+            tutorials.forEach((tutorial, index) => {
                 const cardHTML = `
-                    <div class="carousel-item">
+                    <div class="carousel-item ${index === 0 ? "active" : ""}">
                         <div class="card">
                             <img src="${tutorial.thumb_url}" class="card-img-top" alt="${tutorial.title} thumbnail" />
                             <div class="card-img-overlay text-center">
@@ -86,14 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 carouselInner.innerHTML += cardHTML;
             });
 
-            $('#carouselExampleControls2').slick({
+            $('#carouselExampleControls2 .carousel-inner').slick({
                 slidesToShow: 4,
                 slidesToScroll: 1,
-                arrows: true,
-                prevArrow:
-                    '<button type="button" class="slick-prev"><img src="images/arrow_black_left.png" alt="Previous" /></button>',
-                nextArrow:
-                    '<button type="button" class="slick-next"><img src="images/arrow_black_right.png" alt="Next" /></button>',
                 responsive: [
                     {
                         breakpoint: 1200,
@@ -133,3 +128,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return stars;
         }
 });
+
+// pricing - quotes section
+$(document).ready(function() {
+    $.get('https://smileschool-api.hbtn.info/quotes', function(data) {
+      $('.loader').hide();
+      let quotesHtml = '';
+
+      data.forEach(quote => {
+        quotesHtml += `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <div class="row">
+              <div class="col-sm-3 text-center">
+                <img class="rounded-circle" src="${quote.pic_url}" width="150" height="150" alt="${quote.name}">
+              </div>
+              <div class="col-sm-8 ml-3">
+                <p>${quote.text}</p>
+                <p><span class="font-weight-bold">${quote.name}</span><br>
+                <span class="font-italic">${quote.title}</span></p>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      $('.carousel-inner').html(quotesHtml)
+    });
+  });

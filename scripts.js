@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="card">
                             <img src="${tutorial.thumb_url}" class="card-img-top" alt="${tutorial.title} thumbnail" />
                             <div class="card-img-overlay text-center">
-                                <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
+                                <img src="images/play.png" alt="Play" width="64px" height="64px" class="play-overlay mx-auto" />
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">${tutorial.title}</h5>
@@ -89,6 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
             $('#carouselExampleControls2 .carousel-inner').slick({
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                prevArrow: '.popular-left',
+                nextArrow: '.popular-right',
                 responsive: [
                     {
                         breakpoint: 1200,
@@ -111,13 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 ],
             });
         })
+
         .catch((error) => {
             console.error("Error loading tutorials:", error);
             loader.textContent = "Failed to load";
         });
 
         function generateStars(starCount) {
-            let stars = "";
+            let stars = '<div class="d-flex align-items-center">';
             for (let i = 0; i < 5; i++) {
                 if (i < starCount) {
                     stars += '<img src="images/star_on.png" alt="star on" width="15px" />';
@@ -125,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     stars += '<img src="images/star_off.png" alt="star off" width="15px" />';
                 }
             }
+            stars += '</div>';
             return stars;
         }
 });
